@@ -30,8 +30,6 @@ def img_skin_naive(img):
         for pixel in col:
             skin_ratio += 1 if is_skin_naive(pixel) else 0
 
-    print skin_ratio
-
     skin_ratio /= float(height * width)
 
     return skin_ratio
@@ -53,5 +51,14 @@ def is_skin_naive(pixel):
         and r > b
     )
 
-img = cv2.imread("notskin/14.png")
-print "%s%%" % (img_skin_naive(img) * 100)
+print "Skin" + "=" * 70
+
+for i in get_images("skin"):
+    img = cv2.imread(i)
+    print "%s%%" % (img_skin_naive(img) * 100)
+
+print "Not Skin" + "=" * 70
+
+for i in get_images("notskin"):
+    img = cv2.imread(i)
+    print "%s%%" % (img_skin_naive(img) * 100)
