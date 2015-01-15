@@ -13,11 +13,10 @@ def get_images(directory):
     return result
 
 
-# for imgfile in get_images("ucd-db"):
-#     img = cv2.imread(imgfile)
-
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
+def display_image(image):
+    img = cv2.imread(image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 
 def img_skin_naive(img):
@@ -30,6 +29,8 @@ def img_skin_naive(img):
     for col in img:
         for pixel in col:
             skin_ratio += 1 if is_skin_naive(pixel) else 0
+
+    print skin_ratio
 
     skin_ratio /= float(height * width)
 
@@ -47,12 +48,10 @@ def is_skin_naive(pixel):
         and g > 40
         and b > 20
         and max([r, g, b]) - min([r, g, b]) > 15
-        and abs(r - g) > 15
+        and abs(int(r) - int(g)) > 15
         and r > g
         and r > b
     )
 
-
-
-img = cv2.imread("skin/1.png")
+img = cv2.imread("skin/19.png")
 print img_skin_naive(img)
