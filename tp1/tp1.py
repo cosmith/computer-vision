@@ -41,7 +41,7 @@ def is_skin_naive(pixel):
     """
     Simple classifier: return true if the pixel verifies a set of color constraints
     """
-    r, g, b = pixel
+    b, g, r = pixel
 
     return (
         r > 95
@@ -53,5 +53,5 @@ def is_skin_naive(pixel):
         and r > b
     )
 
-img = cv2.imread("skin/19.png")
-print img_skin_naive(img)
+img = cv2.imread("notskin/14.png")
+print "%s%%" % (img_skin_naive(img) * 100)
