@@ -3,6 +3,9 @@ import numpy as np
 
 import os
 
+import matplotlib.pyplot as plt
+
+
 
 def get_images(directory):
     result = []
@@ -51,14 +54,8 @@ def is_skin_naive(pixel):
         and r > b
     )
 
-print "Skin" + "=" * 70
-
-for i in get_images("skin"):
-    img = cv2.imread(i)
-    print "%s%%" % (img_skin_naive(img) * 100)
-
-print "Not Skin" + "=" * 70
-
-for i in get_images("notskin"):
-    img = cv2.imread(i)
-    print "%s%%" % (img_skin_naive(img) * 100)
+lab_img = cv2.cvtColor(cv2.imread("skin/00.png"), cv2.COLOR_BGR2LAB)
+hist = cv2.calcHist([lab_img], [1,2], None, [32, 32], [0, 32, 0, 32])
+plt.plot(hist)
+plt.xlim([0,32])
+plt.show()
